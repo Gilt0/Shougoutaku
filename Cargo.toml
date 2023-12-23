@@ -1,0 +1,28 @@
+[package]
+name = "saifutaku"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "saifutaku_livetester"
+path = "src/saifutaku_livetester.rs"
+
+[[bin]]
+name = "saifutaku_backtester"
+path = "src/saifutaku_backtester.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+config = "0.11"
+log = "0.4"
+env_logger = "0.9"
+reqwest = { version = "0.11", features = ["json"] }
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio-tungstenite = { version = "0.16", features = ["native-tls"] }
+futures-util = "0.3"
+url = "2.2.2"
+rust_decimal = "1.17.0"
+anyhow = "1.0"
