@@ -6,7 +6,7 @@ import decimal as dc
 pygame.init()
 
 # Window setup
-width, height = 800, 600
+width, height = 1440, 900
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Orderbook Visualization")
 
@@ -18,8 +18,8 @@ ORDER_BOOK_COLOR = (0, 0, 0)
 TEXT_COLOR = (0, 0, 0)
 BAR_HEIGHT = 40
 BAR_Y_POS = height - BAR_HEIGHT - 40  # Leave space for order book display
-SPREAD_Y = 450
-TRADE_Y = 350
+SPREAD_Y = 800
+TRADE_Y = 300
 MAX_LEVELS = 10  # Max price levels to display
 CURSOR_SPEED = 2  # Adjust this value to change how fast the cursor moves with keyboard arrows
 
@@ -145,7 +145,7 @@ def draw_trades(screen, trades, current_timestamp):
             trade_details = f"({bid_trade['E']}) {bid_trade['p']} | {bid_trade['q']}"
             # print(f'{timestamp} - drawing {trade_details}')
             trade_y += 20  # Move down for each trade
-            screen.blit(font.render(trade_details, True, TEXT_COLOR), (width // 2 - 350, trade_y))
+            screen.blit(font.render(trade_details, True, TEXT_COLOR), (width // 2 - 450, trade_y))
     trade_y = TRADE_Y 
     for timestamp, ask_trades in trades["asks"].items():
         if int(current_timestamp) - 100 > int(timestamp) or int(timestamp) > int(current_timestamp) + 100:
@@ -154,7 +154,7 @@ def draw_trades(screen, trades, current_timestamp):
             trade_details = f"({ask_trade['E']}) {ask_trade['p']} | {ask_trade['q']}"
             print(f'{timestamp} - drawing {trade_details}')
             trade_y += 20  # Move down for each trade
-            screen.blit(font.render(trade_details, True, TEXT_COLOR), (width // 2 + 10, trade_y))
+            screen.blit(font.render(trade_details, True, TEXT_COLOR), (width // 2 - 50, trade_y))
 
 # Load bid and ask trades
 bid_trades = []
