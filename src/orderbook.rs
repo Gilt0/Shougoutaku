@@ -112,7 +112,7 @@ impl OrderBook {
         let mut add_next_ask_level_delta: bool = false;
         for (price_level, quantity) in update.asks_to_update {
             debug!("{:?} - ask = {} quantity = {}", "Ask", price_level, quantity);
-           // Check if the best ask price is updated
+            // Check if the best ask price is updated
             if Some(&price_level) == current_best_ask.as_ref() || add_next_ask_level_delta {
                 if let Some(current_volume) = self.asks.get(&price_level) {
                     self.best_ask_updated = true;
