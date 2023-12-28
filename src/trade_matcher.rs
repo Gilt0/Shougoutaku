@@ -2,7 +2,7 @@ use std::collections::{BTreeSet, VecDeque};
 
 use crate::messages::TradeUpdate;
 use crate::orderbook::OrderBook;
-use log::{info, debug, warn};
+use log::{info, debug};
 
 #[derive(Debug)]
 pub enum TradeType {
@@ -39,14 +39,14 @@ impl TradeMatcher {
         debug!("{:?} - Reconciliation attempt on {} trades", self.trade_type, self.trade_queue.len());
     
         for (index, trade) in self.trade_queue.iter().enumerate() {
-            debug!("{:?} - Attempting Trade ID: {} - price: {} - quantity: {}", self.trade_type, trade.trade_id, trade.price, trade.quantity);
+            debug!("{:?} - Attempting Trade ID: {} - price: {} - quantity: {} - timestamp {}", self.trade_type, trade.trade_id, trade.price, trade.quantity, trade.event_time);
             let te = match self.trade_type {
                 TradeType::Bid => orderbook.match_and_process_trade(trade, TradeType::Bid),
                 TradeType::Ask => orderbook.match_and_process_trade(trade, TradeType::Ask),
             };
             
             if te == 1 {
-                warn!("{:?} - Dropped Trade ID: {}", self.trade_type, trade.trade_id);
+                info!("{:?} - Dropped Trade ID: {}", self.trade_type, trade.trade_id);
                 indices_to_remove.push(index);
                 trades_to_insert.push((trade.trade_id.clone(), trade.event_time, te));
             } else if te > 1 {
