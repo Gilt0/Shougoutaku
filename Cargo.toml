@@ -1,5 +1,5 @@
 [package]
-name = "saifutaku"
+name = "shougoutaku"
 version = "0.1.0"
 edition = "2021"
 
@@ -22,3 +22,4 @@ futures-util = "0.3"
 url = "2.2.2"
 rust_decimal = "1.17.0"
 anyhow = "1.0"
+clap = "4.4.11"
