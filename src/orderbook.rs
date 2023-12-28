@@ -74,6 +74,7 @@ impl OrderBook {
         if self.first_update_id_in_event != 0 && update.first_update_id_in_event != self.final_update_id_in_event + 1 { 
             warn!("Update sequence from websocket is mechakucha - update.first_update_id_in_event = {:?}  self.final_update_id_in_event = {:?}", update.first_update_id_in_event, self.final_update_id_in_event);
         }
+        debug!("{:?} - Updating depth - event timestamp: {}", "Bid", update.event_time);
         self.first_update_id_in_event = update.first_update_id_in_event;
         self.final_update_id_in_event = update.final_update_id_in_event;
         // Store the current best bid and ask prices
@@ -158,12 +159,12 @@ impl OrderBook {
         for level_delta in level_deltas.iter_mut() {
             debug!("{:?} - Level Delta {}", trade_type, serde_json::to_string(&level_delta).unwrap());
             debug!("{:?} - Trade {}", trade_type, serde_json::to_string(&trade).unwrap());
-            if level_delta.volume < Decimal::new(0, 0) { continue; }
             let trade_event_time = trade.event_time;
             debug!("{:?} - trade_id = {} level_delta.event_time = {} trade_event_time + 100 = {}", trade_type, trade.trade_id, level_delta.event_time, trade_event_time + 100);
             if level_delta.event_time > (trade_event_time + 100) {
                 return 1;
             }
+            if level_delta.volume < Decimal::new(0, 0) { continue; }
             if trade.price == level_delta.price && trade.quantity == level_delta.volume {
                 // Here, you'd perform the matching logic and return the trade_id if matched
                 debug!("{:?} - Matched event:{} with trade {} - event.volume = {}", trade_type, serde_json::to_string(&level_delta).unwrap(), serde_json::to_string(&trade).unwrap(), level_delta.volume);
