@@ -47,6 +47,7 @@ plt.plot(ask_prices, cumulative_ask_volumes, label="Asks", color="red")
 plt.title('Cumulative Volume by Price')
 plt.xlabel('Price')
 plt.ylabel('Cumulative Volume')
+plt.ylim([0, 2*min(max(cumulative_bid_volumes), max(cumulative_ask_volumes))])
 plt.legend()
 
 # Show the plot
