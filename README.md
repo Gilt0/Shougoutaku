@@ -1,6 +1,6 @@
 # Shougoutaku
 
-This repository is paired with [this medium post]([https://pages.github.com/](https://medium.com/@quantitative-modelling-for-fun/a-physicist-view-on-market-microstructure-building-a-rust-program-to-match-a-trade-with-its-3bced14a5ce7))
+This repository is paired with [this medium post](https://medium.com/@quantitative-modelling-for-fun/a-physicist-view-on-market-microstructure-building-a-rust-program-to-match-a-trade-with-its-3bced14a5ce7)
 
 The main program is a rust application that reconciles trade events with order book events from the Binance websockets. It also has three scripts.
 
